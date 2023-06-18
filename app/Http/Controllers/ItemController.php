@@ -32,15 +32,10 @@ class ItemController extends Controller
         if($request->pic){
             $fileName = time().'.'.$request->pic->extension();
             $request->pic->move(public_path('images/product_pics'), $fileName);
+            $fields['pic'] = $fileName;
         }
 
-        Item::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'qty' => $request->qty,
-            'pic' => $fileName
-        ]);
+        Item::create($fields);
 
         return redirect('/items');
     }
