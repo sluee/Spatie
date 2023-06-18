@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/items', [ItemController::class, 'index'])->name('items');
     Route::get('/items/create', [ItemController::class, 'create']);
     Route::post('/items', [ItemController::class, 'store']);
+    Route::get('/items/{item}', [ItemController::class, 'show']);
 });
 
 require __DIR__.'/auth.php';

@@ -26,8 +26,28 @@ class ItemController extends Controller
             'price' => 'required|numeric',
         ]);
 
-        Item::create($fields);
+        $fileName = null;
+
+        //process image
+        if($request->pic){
+            $fileName = time().'.'.$request->pic->extension();
+            $request->pic->move(public_path('images/product_pics'), $fileName);
+        }
+
+        Item::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'qty' => $request->qty,
+            'pic' => $fileName
+        ]);
 
         return redirect('/items');
+    }
+
+    public function show(Item $item) {
+        return inertia('Items/Show',[
+            'item' => $item
+        ]);
     }
 }

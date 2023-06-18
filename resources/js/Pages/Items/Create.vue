@@ -39,6 +39,13 @@
                         <div class="text-red-600" v-if="form.errors.qty">{{ form.errors.qty }}</div>
                     </div>
                 </div>
+                <div class="flex flex-col mb-3">
+                    <label for="pic">Product Picture</label>
+                    <input type="file" @input="form.pic = $event.target.files[0]" class="h-full border-gray-400 rounded text-center" accept="image/jpeg" />
+                    <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                        {{ form.progress.percentage }}%
+                    </progress>
+                </div>
                 <button class="px-4 py-2 bg-blue-200 w-full rounded border border-blue-300 shadow hover:bg-white">
                     Create Item
                 </button>
@@ -53,13 +60,13 @@
 import { Head, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { useForm } from '@inertiajs/vue3';
-import { stringify } from 'postcss';
 
 const form =  useForm({
     name: null,
     description: null,
     price: 0,
-    qty: 0
+    qty: 0,
+    pic: null
 })
 
 function submit() {
