@@ -6,7 +6,7 @@
             <div class="flex justify-between">
                 <h2>Items</h2>
                 <div>
-                    <Link href="/items/create" class="px-4 py-2 bg-gray-100 shadow border-gray-300 border hover:bg-white rounded">
+                    <Link v-if="$page.props.auth.user.permissions.includes('create-item')" href="/items/create" class="px-4 py-2 bg-gray-100 shadow border-gray-300 border hover:bg-white rounded">
                         Create Item
                     </Link>
                 </div>
